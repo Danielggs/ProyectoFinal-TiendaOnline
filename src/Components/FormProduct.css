@@ -1,0 +1,154 @@
+*{
+    
+    box-sizing: border-box;
+}
+
+body{
+    background-color:antiquewhite
+}
+
+.container{
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+    padding: 40px;
+}
+.form{
+    background-color: aliceblue;
+    display:grid;
+    grid-template-columns:1fr 1fr ;
+    gap: 20px;
+
+
+}
+@media (max-width: 700px) {
+    .form{
+       
+        grid-template-columns:1fr ;
+        
+    
+    
+    }
+}
+
+.labelTi{
+   display: block;
+   font-weight: 700;
+   padding: 10px;
+   min-width: 40px;
+   cursor: pointer;
+
+}
+.labelTiError{
+    display: block;
+    font-weight: 700;
+    padding: 10px;
+    min-width: 40px;
+    cursor: pointer;
+    color: #bb2929;
+ 
+ }
+
+.form > div > div{
+    position: relative;
+    z-index: 90;
+ }
+
+ .input{
+   width: 100%;
+   background: #fff;
+   border-radius: 2px;
+   height: 40px;
+   line-height: 40px;
+   padding: 0 40px 0 10px;
+   transition: .3s ease all;
+   border: 2px solid transparent
+
+    
+
+ }
+ 
+ .input:focus{
+    border: 2px solid #0075ff;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+ 
+   
+  }
+  .inputError{
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 40px 0 10px;
+    transition: .3s ease all;
+    border: 2px solid #bb2929;
+  }
+
+  .inputError:focus{
+    border: 2px solid #bb2929;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+ 
+   
+  }
+  .errorContaimner{ 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-column: span 2;
+
+  }
+  .error {
+    
+     font-size: 14px;
+     margin-bottom: 0;
+     color : #bb2929;
+     /* display: none; */
+  }
+
+  .check-icon{  
+    position: absolute;
+    right: 10px;
+    bottom: 14px;
+    z-index: 100;
+    font-size: 16;
+    color : #0dd477;
+ }
+ .error-icon
+ {  
+    position: absolute;
+    right: 10px;
+    bottom: 14px;
+    z-index: 100;
+    font-size: 16;
+    color : #bb2929;
+ }
+
+ .exito{
+    color : #0dd477;
+ }
+ .buttonContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-column: span 2;
+ }
+
+ .button{
+    height: 40px;
+    line-height:40px;
+    width: 30%;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border:none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: .1s ease all;
+
+ }
+
+
+
