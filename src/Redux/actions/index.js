@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useDispatch } from 'react-redux';
 
-export function traerProductos(){
+export function traerProductos(token){
     return async(dispatch)=>{
-        let product = await axios("http://localhost:3002/product")
+        let product = await axios("http://localhost:3002/product",{headers:{Authorization : `Bearer ${token}`}})
         console.log(product)
       return  dispatch({
             type:"GET_PRODUCT",
@@ -14,9 +14,9 @@ export function traerProductos(){
 
 
 
-export function crearProducto(payload){
-    return async()=>{
-      const response = await axios.post("http://localhost:3002/product",payload)
+export function crearProducto(payload,token){
+  return async()=>{
+      const response = await axios.post("http://localhost:3002/product",payload,{headers:{Authorization : `Bearer ${token}`}})
       console.log(response)
       return response
     }

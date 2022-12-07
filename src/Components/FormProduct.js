@@ -3,9 +3,10 @@ import './FormProduct.css'
 import Input from './formInput'
 import { crearProducto } from '../Redux/actions'
 import { useSelector , useDispatch} from 'react-redux';
-
+import { useAuth0 } from "@auth0/auth0-react";
 const FormProduct = () => {
   const dispatch = useDispatch()
+  const {getAccessTokenSilently } = useAuth0();
   const[titulo, setTitulo] = useState({campo:'',valido:null})
   const[precio, setPrecio] = useState({campo:'',valido:null})
   const[size, setSize] = useState({campo:'',valido:null})
@@ -15,11 +16,18 @@ const FormProduct = () => {
   const expreRN =/^\d{1,14}$/
   const expreIMG = /^[a-zA-Z\d\s\-\,\#\.\/\_\:\;]{1,200}$/
 
-  const onSubmit= (e)=>{
+
+  const onSubmit=async(e)=>{
     e.preventDefault();
 
     if(titulo.valido === 'true' && precio.valido === 'true' && size.valido === 'true'&& image.valido === 'true'){
       SetvalidarForm(true)
+      
+      const domain = "dev-tsvpp07v3bagspkr.us.auth0.com";
+      const accessToken = await getAccessTokenSilently({
+        audience: `https://${domain}/api/v2/`,
+        scope: "read:current_user",
+      });
       dispatch(crearProducto ({
           name:titulo.campo,
           description: '2',
@@ -28,7 +36,7 @@ const FormProduct = () => {
           stock:size.campo,
           category:"llaveros",
            size:'M'
-         }))
+         },accessToken))
      
       setTitulo({campo:'',valido:null})
       setPrecio({campo:'',valido:null})

@@ -8,6 +8,9 @@ import { NavLink } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CartList from './CartList.js'
 import CartModel from './CartModel'
+import Profile from "./profile"
+import Login from "./login"
+import Logout from "./logout"
 
 
 function Navbar() {
@@ -71,8 +74,7 @@ function Navbar() {
             <Link to="/cart" className="navbar-logo3"   onClick={closeMobileMenu} >
               <AiOutlineShoppingCart className="navbar-icon" />
             </Link>
-
-           
+            <Profile/>
           </div>
         </nav>
       </IconContext.Provider>
