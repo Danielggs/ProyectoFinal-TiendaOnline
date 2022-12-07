@@ -1,14 +1,17 @@
 import React ,{useState} from 'react'
 import './FormProduct.css'
 import Input from './formInput'
+import StockInput from './StockInput'
 import { crearProducto } from '../Redux/actions'
 import { useSelector , useDispatch} from 'react-redux';
 
 const FormProduct = () => {
   const dispatch = useDispatch()
   const[titulo, setTitulo] = useState({campo:'',valido:null})
+  const[descripcion, setDescripcion] = useState({campo:'',valido:null})
   const[precio, setPrecio] = useState({campo:'',valido:null})
-  const[size, setSize] = useState({campo:'',valido:null})
+  const[stock, setStock] = useState({campo:{ XL:'',L:'',M:'',S:'',XS:''}
+                                            ,valido:null})
   const[image, setImage] = useState({campo:'',valido:null})
   const[validarForm, SetvalidarForm] = useState(null)
   const expreRP = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
@@ -18,21 +21,21 @@ const FormProduct = () => {
   const onSubmit= (e)=>{
     e.preventDefault();
 
-    if(titulo.valido === 'true' && precio.valido === 'true' && size.valido === 'true'&& image.valido === 'true'){
+    if(titulo.valido === 'true' && precio.valido === 'true' && stock.valido === 'true'&& image.valido === 'true'){
       SetvalidarForm(true)
       dispatch(crearProducto ({
           name:titulo.campo,
           description: '2',
           image:image.campo,
           price:precio.campo,
-          stock:size.campo,
+          stock:stock.campo,
           category:"llaveros",
-           size:'M'
+          
          }))
      
       setTitulo({campo:'',valido:null})
       setPrecio({campo:'',valido:null})
-      setSize({campo:'',valido:null})
+      setStock({campo:{ XL:'',L:'',M:'',S:'',XS:''},valido:null})
       setImage({campo:'',valido:null})
     }else{
       SetvalidarForm(false)
@@ -60,14 +63,6 @@ const FormProduct = () => {
         Error='Caracter no valido'
         expreReg={expreRN}
        />
-       <Input
-       estado={size}
-       cambiarEstado={setSize}
-        titulo='Stock'
-        tipo= 'text'
-        Error='Error'
-        expreReg={expreRN}
-       />
 
        <Input
        estado={image}
@@ -78,6 +73,24 @@ const FormProduct = () => {
         expreReg={expreIMG}
         
        />
+
+     <div className='CategoriContainer'>
+        <label for="categori">elige la categoria :</label>
+
+          <select name="categori" id="categori">
+            <option value="ropa">ropa</option>
+            <option value="peluches">peluche</option>
+            <option value="gorros">gorros</option>
+            <option value="otros">otros</option>
+          </select>
+       </div>
+      
+        <StockInput
+     estado={stock}
+     titulo='Stock'
+     cambiarEstado={setStock}
+       />
+
         <div className='errorContaimner'>
       {validarForm === false && 
         <p className="error">Rellene las casillas correctamente</p>
