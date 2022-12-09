@@ -3,7 +3,7 @@ import {BrowserRouter,Route, Switch } from 'react-router-dom'
 import React from "react";
 import Home from './Components/Home';
 import NavBar from './Components/NavBar'
-import FormProduct from "./Components/FormProduct";
+import FormProduct from "./Components/FormProduct.jsx";
 import CartList from './Components/CartList'
 
 
