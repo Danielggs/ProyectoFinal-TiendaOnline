@@ -9,7 +9,9 @@ const FormProduct = () => {
   const {getAccessTokenSilently } = useAuth0();
   const[titulo, setTitulo] = useState({campo:'',valido:null})
   const[precio, setPrecio] = useState({campo:'',valido:null})
-  const[size, setSize] = useState({campo:'',valido:null})
+  const[key, setKey] = useState({campo:'',valido:null})
+  const[value, setValue] = useState({campo:'',valido:null})
+  const[stock,setStock]=useState({})
   const[image, setImage] = useState({campo:'',valido:null})
   const[validarForm, SetvalidarForm] = useState(null)
   const expreRP = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
@@ -17,10 +19,19 @@ const FormProduct = () => {
   const expreIMG = /^[a-zA-Z\d\s\-\,\#\.\/\_\:\;]{1,200}$/
 
 
+
+
+
+
+
+
+
+
+
   const onSubmit=async(e)=>{
     e.preventDefault();
 
-    if(titulo.valido === 'true' && precio.valido === 'true' && size.valido === 'true'&& image.valido === 'true'){
+    if(titulo.valido === 'true' && precio.valido === 'true' && image.valido === 'true'){
       SetvalidarForm(true)
       
       const domain = "dev-tsvpp07v3bagspkr.us.auth0.com";
@@ -33,14 +44,17 @@ const FormProduct = () => {
           description: '2',
           image:image.campo,
           price:precio.campo,
-          stock:size.campo,
+          stock:stock,
           category:"llaveros",
-           size:'M'
          },accessToken))
      
       setTitulo({campo:'',valido:null})
       setPrecio({campo:'',valido:null})
-      setSize({campo:'',valido:null})
+      setValue({campo:"",valido:null})
+      setKey({campo:"",valido:null})
+      setStock({})
+
+
       setImage({campo:'',valido:null})
     }else{
       SetvalidarForm(false)
@@ -69,15 +83,6 @@ const FormProduct = () => {
         expreReg={expreRN}
        />
        <Input
-       estado={size}
-       cambiarEstado={setSize}
-        titulo='Stock'
-        tipo= 'text'
-        Error='Error'
-        expreReg={expreRN}
-       />
-
-       <Input
        estado={image}
        cambiarEstado={setImage}
         titulo='image'
@@ -86,6 +91,39 @@ const FormProduct = () => {
         expreReg={expreIMG}
         
        />
+
+
+
+       <div className='stock-imputs'>
+        
+        <h1>Stock</h1>
+        {stock&&Object.keys(stock).map((e)=>{
+          return <p>{e+" : "+stock[e]}</p>
+        })}
+        <Input
+          estado={key}
+          cambiarEstado={setKey}
+          titulo='key'
+          tipo='text'
+          Error='ingrese una key valida'
+          expreReg={expreRP}
+        />
+        <Input
+          estado={value}
+          cambiarEstado={setValue}
+          titulo='value'
+          tipo='text'
+          Error='ingrese un value valido'
+          expreReg={expreRN}
+        />
+        <button type='button' onClick={()=>{
+          setStock({...stock,[key.campo]:value.campo})
+        }}>add</button>
+        </div>
+
+
+
+
         <div className='errorContaimner'>
       {validarForm === false && 
         <p className="error">Rellene las casillas correctamente</p>
@@ -103,6 +141,3 @@ const FormProduct = () => {
 }
 
 export default FormProduct  
-
-
- 
