@@ -4,6 +4,7 @@ import Input from './formInput'
 import { crearProducto } from '../Redux/actions'
 import { useSelector , useDispatch} from 'react-redux';
 import { useAuth0 } from "@auth0/auth0-react";
+import ImageInput from './ImageInput';
 const FormProduct = () => {
   const dispatch = useDispatch()
   const {getAccessTokenSilently } = useAuth0();
@@ -12,26 +13,16 @@ const FormProduct = () => {
   const[key, setKey] = useState({campo:'',valido:null})
   const[value, setValue] = useState({campo:'',valido:null})
   const[stock,setStock]=useState({})
-  const[image, setImage] = useState({campo:'',valido:null})
+  const [image , setImage] =  useState([])
   const[validarForm, SetvalidarForm] = useState(null)
   const expreRP = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
   const expreRN =/^\d{1,14}$/
-  const expreIMG = /^[a-zA-Z\d\s\-\,\#\.\/\_\:\;]{1,200}$/
-
-
-
-
-
-
-
-
-
 
 
   const onSubmit=async(e)=>{
     e.preventDefault();
-
-    if(titulo.valido === 'true' && precio.valido === 'true' && image.valido === 'true'){
+    console.log(image.length)
+    if(titulo.valido === 'true' && precio.valido === 'true' && image.length !==0 ){
       SetvalidarForm(true)
       
       const domain = "dev-tsvpp07v3bagspkr.us.auth0.com";
@@ -39,10 +30,11 @@ const FormProduct = () => {
         audience: `https://${domain}/api/v2/`,
         scope: "read:current_user",
       });
+  
       dispatch(crearProducto ({
           name:titulo.campo,
           description: '2',
-          image:image.campo,
+          image:image[0].url,
           price:precio.campo,
           stock:stock,
           category:"llaveros",
@@ -53,9 +45,8 @@ const FormProduct = () => {
       setValue({campo:"",valido:null})
       setKey({campo:"",valido:null})
       setStock({})
+      setImage([])
 
-
-      setImage({campo:'',valido:null})
     }else{
       SetvalidarForm(false)
     }
@@ -82,7 +73,7 @@ const FormProduct = () => {
         Error='Caracter no valido'
         expreReg={expreRN}
        />
-       <Input
+  {   /* <Input
        estado={image}
        cambiarEstado={setImage}
         titulo='image'
@@ -90,14 +81,21 @@ const FormProduct = () => {
         Error='ingrese una imagen'
         expreReg={expreIMG}
         
-       />
+       /> */}
+  
 
-
+        <div className='stock-imputs'>
+          <ImageInput 
+           estado={image}
+           cambiarEstado={setImage}
+          />
+        </div>
 
        <div className='stock-imputs'>
         
         <h1>Stock</h1>
         {stock&&Object.keys(stock).map((e)=>{
+          console.log(e)
           return <p>{e+" : "+stock[e]}</p>
         })}
         <Input
