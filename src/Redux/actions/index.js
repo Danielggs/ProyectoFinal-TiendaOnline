@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 export function traerProductos(token){
     return async(dispatch)=>{
-        let product = await axios("http://localhost:3002/product",{headers:{Authorization : `Bearer ${token}`}})
+        let product = await axios("https://pf-backend-production-1e5b.up.railway.app/product",{headers:{Authorization : `Bearer ${token}`}})
         console.log(product)
       return  dispatch({
             type:"GET_PRODUCT",
@@ -16,7 +16,7 @@ export function traerProductos(token){
 
 export function crearProducto(payload,token){
   return async()=>{
-      const response = await axios.post("http://localhost:3002/product",payload,{headers:{Authorization : `Bearer ${token}`}})
+      const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/product",payload,{headers:{Authorization : `Bearer ${token}`}})
       console.log(response)
       return response
     }

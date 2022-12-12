@@ -15,7 +15,7 @@ useEffect(async()=>{
     audience: `https://${domain}/api/v2/`,
     scope: "read:current_user",
   });
-  axios.post("http://localhost:3002/user",{name:user.name,email:user.email},{headers:{Authorization : `Bearer ${token}`}})  
+  axios.post("https://pf-backend-production-1e5b.up.railway.app/user",{name:user.name,email:user.email},{headers:{Authorization : `Bearer ${token}`}})  
 },[isAuthenticated])
 
 
