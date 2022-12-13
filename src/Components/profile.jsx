@@ -4,7 +4,7 @@ import "./profile.css"
 import Login from "./login";
 import Logout from "./logout";
 import axios from 'axios'
-
+import { Link } from "react-router-dom";
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
@@ -23,8 +23,10 @@ useEffect(async()=>{
   return (
     isAuthenticated?(
       <div className="profile">
-        <img className="profile-img" src={user.picture} alt={user.name} />
-        <p className="profile-name" >{user.name}</p>
+        <Link to = "user">
+          <img className="profile-img" src={user.picture} alt={user.name} />
+        </Link>
+        <p className="profile-name" >{user.given_name}</p>
         <Logout/>
       </div>
     ):<Login/>
