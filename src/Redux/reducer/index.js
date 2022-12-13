@@ -59,6 +59,12 @@ function rootReducer(state = initialState, action){
                 cart:Ncart
             } 
 
+            case "PREFERENCE":
+                return{
+               
+                    ...state 
+                }
+
         default:
             return state
     }

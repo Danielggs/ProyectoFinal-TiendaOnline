@@ -1,0 +1,17 @@
+.imageContainer{
+    display: flex;
+}
+
+.ImagePreview{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+}
+
+.ImagePreview img { 
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    
+}
