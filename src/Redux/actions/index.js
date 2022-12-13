@@ -12,7 +12,12 @@ export function traerProductos(token){
 
 }
 
-
+export function paginarProductos(page){
+  return{
+    type:"PAGINAR_PRODUCTOS",
+    payload:page
+  }
+}
 
 export function crearProducto(payload,token){
   return async()=>{

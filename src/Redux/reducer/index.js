@@ -2,6 +2,8 @@
 const initialState={
     product:[],
 
+    productPaginate:[],
+
     category:[],
 
     cart:[]
@@ -11,6 +13,17 @@ const initialState={
 
 function rootReducer(state = initialState, action){
     switch (action.type) {
+
+        case "PAGINAR_PRODUCTOS":
+            console.log('data action',action.payload)
+        return{
+                ...state,
+                productPaginate:state.product.filter((e,i)=>{
+                    return i>=(action.payload*6) &&i<(action.payload*6)+6
+                })
+            }
+
+
         case "GET_PRODUCT" :
            console.log('data action',action.payload)
             return{

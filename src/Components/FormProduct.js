@@ -8,8 +8,10 @@ import ImageInput from './ImageInput';
 const FormProduct = () => {
   const dispatch = useDispatch()
   const {getAccessTokenSilently } = useAuth0();
+  const[description, setDescription] = useState({campo:'',valido:null})
   const[titulo, setTitulo] = useState({campo:'',valido:null})
   const[precio, setPrecio] = useState({campo:'',valido:null})
+  const[category, setCategory] = useState({campo:'',valido:null})
   const[key, setKey] = useState({campo:'',valido:null})
   const[value, setValue] = useState({campo:'',valido:null})
   const[stock,setStock]=useState({})
@@ -33,13 +35,13 @@ const FormProduct = () => {
   
       dispatch(crearProducto ({
           name:titulo.campo,
-          description: '2',
+          description: description.campo,
           image:image[0].url,
           price:precio.campo,
           stock:stock,
-          category:"llaveros",
+          category:category.campo,
          },accessToken))
-     
+      setCategory({campo:'',valido:null})
       setTitulo({campo:'',valido:null})
       setPrecio({campo:'',valido:null})
       setValue({campo:"",valido:null})
@@ -73,6 +75,23 @@ const FormProduct = () => {
         Error='Caracter no valido'
         expreReg={expreRN}
        />
+       <Input
+       estado={category}
+       cambiarEstado={setCategory}
+        titulo='categoria'
+        tipo= 'text'
+        Error='Caracter no valido'
+        expreReg={expreRP}
+       />
+       <Input
+       estado={description}
+       cambiarEstado={setDescription}
+        titulo='descripcion'
+        tipo= 'text'
+        Error='Caracter no valido'
+        expreReg={expreRP}
+       />
+
   {   /* <Input
        estado={image}
        cambiarEstado={setImage}
