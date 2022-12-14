@@ -34,7 +34,7 @@ export function addCart(data){
         type:"ADD_CART",
         payload: data})
     }
-}
+} 
 
 export function RemoveToCart(id){
   return async(dispatch)=>{
