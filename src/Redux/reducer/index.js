@@ -11,10 +11,7 @@ const initialState={
     cart:[],
     search:"",
 
-    filter:[{type:'category',value:'pantalon'},
-            {type:'category',value:'camisa'},
-            {type:'category',value:'vestido'},
-            {type:'category',value:'llavero'}]
+    filter:[]
 }
 
 
