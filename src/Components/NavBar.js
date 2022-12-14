@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import { AiOutlineQq } from "react-icons/ai";
@@ -11,7 +11,8 @@ import CartModel from './CartModel'
 import Profile from "./profile"
 import Login from "./login"
 import Logout from "./logout"
-
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -20,6 +21,14 @@ function Navbar() {
   const handleClick2 = () => setClick2(!click2);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [isAdmin,setIsAdmin]= useState(false);
+  useEffect(async()=>{
+    if(!isAuthenticated)return;
+    var token=await getAccessTokenSilently();
+    const r= await axios("https://pf-backend-production-1e5b.up.railway.app/user?name="+user.name,{headers:{Authorization : `Bearer ${token}`}})
+    setIsAdmin(r.data.isAdmin)
+  },[isAuthenticated])
 
   return (
     <>
@@ -45,18 +54,7 @@ function Navbar() {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/create"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Agregar Producto
-                </NavLink>
-              </li>
-              <li className="nav-item">
+              {isAdmin?<li className="nav-item">
                 <NavLink
                   to="/admin"
                   className={({ isActive }) =>
@@ -66,7 +64,8 @@ function Navbar() {
                 >
                   Admin
                 </NavLink>
-              </li>
+              </li>:null}
+
             </ul>
             <Link to="/cart" className="navbar-logo2" onClick={handleClick2}>
               <AiOutlineShoppingCart className="navbar-icon" />
