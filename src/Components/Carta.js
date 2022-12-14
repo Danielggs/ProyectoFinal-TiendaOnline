@@ -24,11 +24,14 @@ const Card = ({data}) => {
     <div className="contentBx">
       <h2>{data.name}</h2>
       <div className="size">
-        <h3>Size :</h3>
-        <span>7</span>
-        <span>8</span>
-        <span>9</span>
-        <span>10</span>
+        <h3>Stock :</h3>
+        {
+          Object.keys(data.stock).map((e)=>{
+            return <h3>{e}:{data.stock[e]}</h3>;
+          })
+        }
+
+        
       </div>
        <div className="color">
         <h3>Precio : {data.price}</h3>

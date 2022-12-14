@@ -12,7 +12,12 @@ export function traerProductos(token){
 
 }
 
-
+export function paginarProductos(page){
+  return{
+    type:"PAGINAR_PRODUCTOS",
+    payload:page
+  }
+}
 
 export function crearProducto(payload,token){
   return async()=>{
@@ -29,7 +34,7 @@ export function addCart(data){
         type:"ADD_CART",
         payload: data})
     }
-}
+} 
 
 export function RemoveToCart(id){
   return async(dispatch)=>{
@@ -38,3 +43,11 @@ export function RemoveToCart(id){
       payload: id})
   }
 }
+
+export function CrearRef(cart,token){
+	return async()=>{
+	  const response = await axios.post("http://localhost:3002/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
+	  console.log(response)
+	  return response
+	}
+  }

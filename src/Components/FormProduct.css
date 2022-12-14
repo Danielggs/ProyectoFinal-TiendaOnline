@@ -13,6 +13,15 @@ body{
    grid-column: span 2;
 }
 
+
+.stock-imputs{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   grid-column: span 2;
+}
+
+
 .container{
     max-width: 800px;
     width: 90%;
@@ -141,6 +150,13 @@ body{
     flex-direction: column;
     grid-column: span 2;
  }
+ .CategoriContainer{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   grid-column: span 2;
+}
+
 
  .button{
     height: 40px;
