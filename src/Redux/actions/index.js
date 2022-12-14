@@ -27,6 +27,24 @@ export function crearProducto(payload,token){
     }
     
 }
+export function search(str){
+  return {
+    type:"SEARCH",
+    payload:str
+  }
+}
+export function deleteFilter(tipo){
+  return{
+    type:"DELETE_FILTRO",
+    payload:tipo
+  }
+}
+export function addFilter(tipo){
+  return{
+    type:"ADD_FILTRO",
+    payload:tipo
+  }
+}
 
 export function addCart(data){
     return async(dispatch)=>{
@@ -46,7 +64,7 @@ export function RemoveToCart(id){
 
 export function CrearRef(cart,token){
 	return async()=>{
-	  const response = await axios.post("http://localhost:3002/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
+	  const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
 	  console.log(response)
 	  return response
 	}
