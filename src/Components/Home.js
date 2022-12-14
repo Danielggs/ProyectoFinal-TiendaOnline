@@ -2,6 +2,7 @@ import React from 'react'
 import Cartas from './Cartas.js'
 import { useSelector,useDispatch } from 'react-redux'
 import { paginarProductos } from '../Redux/actions/index.js'
+import SearchBar from "./searchBar"
 import './Home.css'
 
 
@@ -11,6 +12,7 @@ const Home = () => {
   const CantidadProductos=useSelector(state=>state.product.length)
   return (
     <div className='container2' >
+      <SearchBar/>
       <div  className='cardContainer'>
         <Cartas/>
         {

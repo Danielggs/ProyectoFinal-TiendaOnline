@@ -1,0 +1,17 @@
+.filtros{
+    display: flex;
+    align-items: center;
+}
+.filtro{
+    border-radius: 10px ;
+    background-color:#f0b12a;
+    padding: 5px;
+    margin: 3px;
+}
+.filter-button{
+    width: 20px;
+    width: 20px;
+    background-color: red;
+    border-radius: 5px;
+    border: 0px;
+}

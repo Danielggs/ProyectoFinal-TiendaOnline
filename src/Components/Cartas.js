@@ -38,7 +38,7 @@ export default function Cartas(){
             {
               AllProductos.length > 0 ? AllProductos.map((el)=>{
               return   <Carta data={el} /> 
-              }): <h2>No se encontro Nada</h2>
+              }): <div id = "loader"><div class="spinner"></div></div>
             }
             
     </>     
