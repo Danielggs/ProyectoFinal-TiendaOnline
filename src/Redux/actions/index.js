@@ -40,9 +40,20 @@ export function RemoveToCart(id){
 }
 
 export function CrearRef(cart,token){
-	return async()=>{
+	return async(dispatch)=>{
 	  const response = await axios.post("http://localhost:3002/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
-	  console.log(response)
-	  return response
+	 console.log("data: ", response.data)
+    return  dispatch({
+      type:"PREF",
+      payload: response.data})
 	}
   }
+
+  
+export function findByID(id){
+  return async(dispatch)=>{
+    return  dispatch({
+      type:"FIND_BY_ID",
+      payload: id})
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import CartModel from './CartModel'
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import CheckOut  from './CheckOut'
 import { useAuth0 } from "@auth0/auth0-react";
@@ -9,6 +10,7 @@ import { CrearRef } from '../Redux/actions'
 
 const CartList = () => {
   const dispatch = useDispatch()
+  const linkPago = useSelector((state)=>state.linkPago)
   const {getAccessTokenSilently } = useAuth0();
   const cartLS = useSelector((state)=>state.cart)
   let Ncart = JSON.parse(localStorage.getItem('cart'))
@@ -17,6 +19,7 @@ const CartList = () => {
     Ncart = 0
   }
   
+  console.log(Ncart)
 const onclickR=async()=>{
 
     
@@ -32,8 +35,6 @@ const onclickR=async()=>{
    },accessToken))}
 
 
-    console.log('lista del carrito LS', Ncart)
-
   return (
     <div className='CartlistContainer'>
          {
@@ -41,12 +42,15 @@ const onclickR=async()=>{
                 console.log(cartLS.length)
              return <CartModel items={el}/> 
 
-            }): <h2>El carrito esta vacio</h2>
+            } ) : <h2>El carrito esta vacio</h2>
             }
+
+{Ncart.length  > 0 ? <div className='w-24 my-10 mx-10 '>
+		<button onClick={onclickR}> Generar Link de pago</button>
+    <a href={linkPago} > Link De pago </a>
+	</div>: null}
             <div>
-	 <div className='w-24 my-10 mx-10 '>
-		<button onClick={onclickR}> PAGAR</button>
-	</div>
+	 
 	 </div>
 
 

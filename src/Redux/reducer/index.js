@@ -1,9 +1,8 @@
 
 const initialState={
     product:[],
-
-    category:[],
-
+    productDetail:[],
+    linkPago:'',
     cart:[]
 }
 
@@ -16,6 +15,7 @@ function rootReducer(state = initialState, action){
             return{
                 ...state,
                 product: action.payload, 
+    
             }
             
 
@@ -59,11 +59,22 @@ function rootReducer(state = initialState, action){
                 cart:Ncart
             } 
 
-            case "PREFERENCE":
+         case "PREF":
+                console.log( action.payload)
                 return{
-               
-                    ...state 
+                    
+                    ...state, 
+                    linkPago: action.payload
                 }
+          case "FIND_BY_ID":
+                    console.log( action.payload)
+                    var allProduct= state.product
+                    var findByID = allProduct.filter(el=> el.id.includes(action.payload))
+                    console.log(findByID)
+                    return{
+                         ...state,
+                         productDetail:findByID
+                    }
 
         default:
             return state

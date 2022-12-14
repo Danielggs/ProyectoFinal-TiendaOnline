@@ -22,10 +22,10 @@ const CartModel = ({items}) => {
         <p> carrito</p>
         <div>
             <div>
-                <img className='cartImage' src={items.image} alt='img not found'/>
+                <img className='cartImage' src={items.picture_url} alt='img not found'/>
                 <div>
-                    <p>{items.name}</p>
-                    <p>${items.price} - cantidad <span>total</span></p>
+                    <p>{items.title}</p>
+                    <p>${items.unit_price} - cantidad <span>total</span></p>
                 </div>
                 
                 <div onClick={handleClickD}>
