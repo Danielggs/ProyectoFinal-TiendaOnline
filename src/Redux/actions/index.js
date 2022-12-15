@@ -46,19 +46,19 @@ export function addFilter(tipo){
   }
 }
 
-export function addCart(data){
+export function addCart(data,email){
     return async(dispatch)=>{
       return  dispatch({
         type:"ADD_CART",
-        payload: data})
+        payload: data,email})
     }
 } 
 
-export function RemoveToCart(id){
+export function RemoveToCart(id,email){
   return async(dispatch)=>{
     return  dispatch({
       type:"REMOVE_TO_CART",
-      payload: id})
+      payload: id,email})
   }
 }
 

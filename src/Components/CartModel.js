@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react'
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,10 +9,10 @@ import './CartModel.css'
 const CartModel = ({items}) => {
     const dispatch = useDispatch()
 
-
+    const {user}=useAuth0()
     const handleClickD = ()=>{
-        dispatch(RemoveToCart (items.id))
-     
+        dispatch(RemoveToCart (items.id,user?.email))
+
 
       }
  
