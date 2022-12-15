@@ -35,13 +35,13 @@ function rootReducer(state = initialState, action){
                             case "price":
                                 if(permitir){
                                     var value=f.value.substr(1)
-                                    if(f.value[0]=='>'){
+                                    if(f.value[0]==='>'){
                                         permitir=e.price>value;
                                     }
-                                    if(f.value[0]=='<'){
+                                    if(f.value[0]==='<'){
                                         permitir=e.price<value;
                                     }
-                                    if(f.value[0]=='='){
+                                    if(f.value[0]==='='){
                                         permitir=e.price==value;
                                     }
                                 }

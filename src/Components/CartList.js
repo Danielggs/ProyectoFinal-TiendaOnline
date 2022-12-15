@@ -25,24 +25,35 @@ const CartList = () => {
         name: data.title,
         quantity:data.quantity
     }}) 
-    console.log(change)
+    console.log( " datos para cambiar el Stock ",change)
 
-const onclickR=async()=>{
+   var myJSONString = JSON.stringify(change);
+   let json= {
+    data:myJSONString
+   }
 
-    
+ const onclickR=async()=>{
+
+  const domain = "dev-tsvpp07v3bagspkr.us.auth0.com";
+  const accessToken = await getAccessTokenSilently({
+    audience: `https://${domain}/api/v2/`,
+    scope: "read:current_user",
+  });
+  dispatch(CrearRef ({
+    Ncart
+   },accessToken))}
+
+
+   const onclickCompra=async()=>{
+
   const domain = "dev-tsvpp07v3bagspkr.us.auth0.com";
   const accessToken = await getAccessTokenSilently({
     audience: `https://${domain}/api/v2/`,
     scope: "read:current_user",
   });
 
-  
-  dispatch(CrearRef ({
-    Ncart
-   },accessToken))}
-
-   const onclickCompra=async()=>{
-    dispatch(updateProduct())
+    dispatch(updateProduct(json,accessToken))
+    console.log("se despacho",json)
    }
 
 
@@ -58,7 +69,7 @@ const onclickR=async()=>{
 
 {Ncart.length  > 0 ? <div className='w-24 my-10 mx-10 '>
 		<button onClick={onclickR}> Generar Link de pago</button>
-    <a href={linkPago} > Link De pago </a>
+    <a href={linkPago} onClick={onclickCompra}  > Link De pago </a>
 	</div>: null}
             <div>
 	 

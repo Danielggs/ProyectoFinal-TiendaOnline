@@ -82,7 +82,8 @@ export function findByID(id){
 }
 
 export function updateProduct(payload,token) {
-  return async function (dispatch) {
-      const data = await axios.put(`http://localhost:3002/product`, payload,{headers:{Authorization : `Bearer ${token}`}})
-      return dispatch({ type: "PRODUCT_UPDATE", payload: data})
+  return async function () {
+    console.log(payload)
+      const data = await axios.put("https://pf-backend-production-1e5b.up.railway.app/product/cambiar", payload,{headers:{Authorization : `Bearer ${token}`}})
+      return data
   }}
