@@ -21,14 +21,14 @@ const CartList = () => {
   if(Ncart === null){
     Ncart = 0
   }
-  
+  console.log(Ncart)
  
     let change = Ncart.map((data)=>{
  return  {
         name: data.title,
         quantity:data.quantity
     }}) 
-    console.log( " datos para cambiar el Stock ",change)
+
 
    var myJSONString = JSON.stringify(change);
    let json= {
