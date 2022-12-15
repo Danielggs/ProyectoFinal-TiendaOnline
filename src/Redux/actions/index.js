@@ -22,7 +22,7 @@ export function paginarProductos(page){
 export function crearProducto(payload,token){
   return async()=>{
       const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/product",payload,{headers:{Authorization : `Bearer ${token}`}})
-      console.log(response)
+     
       return response
     }
     
@@ -63,9 +63,26 @@ export function RemoveToCart(id,email){
 }
 
 export function CrearRef(cart,token){
-	return async()=>{
-	  const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
-	  console.log(response)
-	  return response
+  return async(dispatch)=>{
+    const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
+
+    return  dispatch({
+      type:"PREF",
+      payload: response.data})
 	}
   }
+
+  
+export function findByID(id){
+  return async(dispatch)=>{
+    return  dispatch({
+      type:"FIND_BY_ID",
+      payload: id})
+  }
+}
+
+export function updateProduct(payload,token) {
+  return async function (dispatch) {
+      const data = await axios.put(`http://localhost:3002/product`, payload,{headers:{Authorization : `Bearer ${token}`}})
+      return dispatch({ type: "PRODUCT_UPDATE", payload: data})
+  }}
