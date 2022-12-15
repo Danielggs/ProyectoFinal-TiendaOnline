@@ -3,11 +3,23 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { deleteFilter,addFilter,paginarProductos,search } from "../Redux/actions";
 import "./searchBar.css"
+
+
+function eliminar_repetidos(arr){
+    var r={}
+    arr.forEach((e)=>{
+        r[e]=1;
+    })
+    return Object.keys(r);
+}
+
+
+
 function SearchBar(){
     const filter=useSelector(e=>e.filter)
     
     
-    const categories=useSelector(e=>e.all_product.map(p=>p.category))
+    const categories=useSelector( e=>eliminar_repetidos(e.all_product.map(p=>p.category)) )
 
 
     const dispatch=useDispatch();
@@ -15,14 +27,14 @@ function SearchBar(){
     const [filter_value,set_filter_value]=useState("camisa") 
     const [filter_value_modifier,set_filter_value_modifier]=useState("=") 
     return(<div>
-        <input type="text" placeholder="search" onChange={(e)=>{
+        <input className="filter-input" type="text" placeholder="search" onChange={(e)=>{
             e.preventDefault();
             dispatch(search(e.target.value))
             dispatch({type:"FILTRAR"})
         }}/>
         
         
-        <select onChange={(e)=>{
+        <select className="filter-select" onChange={(e)=>{
             e.preventDefault();
             set_filter_category(e.target.value)
         }}>
@@ -30,7 +42,7 @@ function SearchBar(){
             <option value="price">price</option>
         </select >
         {
-            filter_category=="category"?<select onChange={(e)=>{
+            filter_category=="category"?<select className="filter-select" onChange={(e)=>{
                 e.preventDefault();
                 set_filter_value(e.target.value)
             }}>{
@@ -39,7 +51,7 @@ function SearchBar(){
                 })
             }
             </select>
-            :<select onChange={(e)=>{
+            :<select className="filter-select" onChange={(e)=>{
                 e.preventDefault();
                 set_filter_value_modifier(e.target.value);
             }}>
@@ -49,7 +61,7 @@ function SearchBar(){
             </select>
         }        
         {
-            filter_category=="price"?<input type="number" placeholder="cantidad" onChange={(e)=>{
+            filter_category=="price"?<input className="filter-input" type="number" placeholder="cantidad" onChange={(e)=>{
                 e.preventDefault()
                 set_filter_value(filter_value_modifier+e.target.value);
                 console.log(filter_value_modifier+e.target.value);
@@ -63,7 +75,7 @@ function SearchBar(){
 
 
 
-        <button onClick={()=>{
+        <button className="addfilter-button" onClick={()=>{
             dispatch(addFilter({type:filter_category,value:filter_value}))
             dispatch({type:"FILTRAR"})
             dispatch(paginarProductos(0))
