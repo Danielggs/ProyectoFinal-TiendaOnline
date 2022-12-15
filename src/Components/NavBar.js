@@ -37,7 +37,7 @@ function Navbar() {
           <div className="navbar-container container">
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
               <AiOutlineQq className="navbar-icon" />
-              Titulo
+              Titulo 
             </Link>
             <div className="menu-icon" onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
