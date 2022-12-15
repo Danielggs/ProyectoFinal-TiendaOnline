@@ -1,16 +1,13 @@
-import { act } from "react-dom/test-utils";
+
 
 const initialState={
-    all_product:[],
     product:[],
-
+    all_product:[],
     productPaginate:[],
-
-    category:[],
-
+    productDetail:[],
+    linkPago:'',
     cart:[],
     search:"",
-
     filter:[]
 }
 
@@ -74,7 +71,7 @@ function rootReducer(state = initialState, action){
         
 
         case "PAGINAR_PRODUCTOS":
-            console.log('data action',action.payload)
+       
         return{
                 ...state,
                 productPaginate:state.product.filter((e,i)=>{
@@ -84,19 +81,23 @@ function rootReducer(state = initialState, action){
 
 
         case "GET_PRODUCT" :
-           console.log('data action',action.payload)
+          
             return{
                 ...state,
                 product: [...action.payload], 
                 all_product:[...action.payload]
+    
             }
             
 
         case "POST_PRODUCT":
                 return{
-                    //wft4mprxhu2
+                   
                     ...state 
                 }
+        case "PRODUCT_UPDATE":
+               return{            
+                ...state }
 
                 case 'ADD_CART':
            let  Ncarts = JSON.parse(localStorage.getItem('cart'))
@@ -104,13 +105,14 @@ function rootReducer(state = initialState, action){
             if(Ncarts === null){
                Ncarts =[]
                Ncarts.push(action.payload)
+               
           
 
             }else{
                 Ncarts.push(action.payload)
              
             }
-            console.log(Ncarts)
+          
             
             localStorage.setItem('cart', JSON.stringify(Ncarts)) 
            
@@ -132,11 +134,22 @@ function rootReducer(state = initialState, action){
                 cart:Ncart
             } 
 
-            case "PREFERENCE":
+         case "PREF":
+              
                 return{
-               
-                    ...state 
+                    
+                    ...state, 
+                    linkPago: action.payload
                 }
+          case "FIND_BY_ID":
+                    
+                    var allProduct= state.product
+                    var findByID = allProduct.filter(el=> el.id.includes(action.payload))
+                    
+                    return{
+                         ...state,
+                         productDetail:findByID
+                    }
 
         default:
             return state

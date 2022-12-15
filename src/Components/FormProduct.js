@@ -6,17 +6,19 @@ import { crearProducto } from '../Redux/actions'
 import { useSelector , useDispatch} from 'react-redux';
 import { useAuth0 } from "@auth0/auth0-react";
 import ImageInput from './ImageInput';
+
+
 const FormProduct = () => {
   const dispatch = useDispatch()
   const {getAccessTokenSilently } = useAuth0();
   const[description, setDescription] = useState({campo:'',valido:null})
   const[titulo, setTitulo] = useState({campo:'',valido:null})
-  const[descripcion, setDescripcion] = useState({campo:'',valido:null})
-  const[precio, setPrecio] = useState({campo:'',valido:null})
   const[category, setCategory] = useState({campo:'',valido:null})
+  const[precio, setPrecio] = useState({campo:'',valido:null})
   const[key, setKey] = useState({campo:'',valido:null})
   const[value, setValue] = useState({campo:'',valido:null})
   const[stock,setStock]=useState({})
+
   const [image , setImage] =  useState([])
   const[validarForm, SetvalidarForm] = useState(null)
   const expreRP = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
@@ -43,6 +45,8 @@ const FormProduct = () => {
           stock:stock,
           category:category.campo,
          },accessToken))
+      setCategory({campo:'',valido:null})
+      setTitulo({campo:'',valido:null})
       setCategory({campo:'',valido:null})
       setTitulo({campo:'',valido:null})
       setPrecio({campo:'',valido:null})
@@ -76,8 +80,10 @@ const FormProduct = () => {
         tipo= 'text'
         Error='Caracter no valido'
         expreReg={expreRN}
+        
        />
-       <Input
+
+<Input
        estado={category}
        cambiarEstado={setCategory}
         titulo='categoria'
@@ -93,6 +99,7 @@ const FormProduct = () => {
         Error='Caracter no valido'
         expreReg={expreRP}
        />
+   
 
   {   /* <Input
        estado={image}
@@ -111,6 +118,7 @@ const FormProduct = () => {
            cambiarEstado={setImage}
           />
         </div>
+        
 
        <div className='stock-imputs'>
         
@@ -134,7 +142,9 @@ const FormProduct = () => {
           tipo='text'
           Error='ingrese un value valido'
           expreReg={expreRN}
+          
         />
+    
         <button type='button' onClick={()=>{
           setStock({...stock,[key.campo]:value.campo})
         }}>add</button>
