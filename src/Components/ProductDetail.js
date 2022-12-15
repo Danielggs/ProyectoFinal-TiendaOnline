@@ -10,12 +10,15 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { traerProductos } from '../Redux/actions';
 
 
+
 const ProductDetail = ({data,id}) => {
 
     const dispatch = useDispatch()
     const[quantity, setQuantity] = useState(1)
     const [stars,setStars]=useState(5);
     const {user,getAccessTokenSilently}=useAuth0()
+    
+  
    let productTocart= {
         id: data.id,
         title: data.name,
@@ -39,7 +42,7 @@ const ProductDetail = ({data,id}) => {
 
     const onClick = (e)=>{
    
-      dispatch(addCart (productTocart))
+      dispatch(addCart (productTocart,user?.email))
     }
   return (<>
     <div id="containerDetails">	
@@ -59,7 +62,7 @@ const ProductDetail = ({data,id}) => {
                 <b> stock : {data.stock.cantidad}</b>
 <div className="control">
 	
-	<button className="btn" onClick={onClick}> >
+	<button className="btn" onClick={onClick}> 
 	 <span className="price">${data.price}</span>
    <span className="shopping-cart">  <AiOutlineShoppingCart className="fa fa-shopping-cart"/></span>
    <span className="buy">Get now</span>
