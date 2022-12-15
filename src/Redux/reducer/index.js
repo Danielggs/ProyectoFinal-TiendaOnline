@@ -101,6 +101,7 @@ function rootReducer(state = initialState, action){
 
                 case 'ADD_CART':
            let  Ncarts = JSON.parse(localStorage.getItem('cart'))
+           console.log(action.payload.id)
                 
             if(Ncarts === null){
                Ncarts =[]
@@ -110,6 +111,9 @@ function rootReducer(state = initialState, action){
 
             }else{
                 Ncarts.push(action.payload)
+                let hash = {};
+                Ncarts = Ncarts.filter(o => hash[o.id] ? false : hash[o.id] = true);
+                console.log(Ncarts);
              
             }
           

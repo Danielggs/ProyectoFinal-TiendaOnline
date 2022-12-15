@@ -14,18 +14,21 @@ const CartModel = ({items}) => {
      
 
       }
+     let suma=items.unit_price*items.quantity
  
 
   return (
     <>
+    
+        <h1>Carrito</h1>
     <div className='cartContainer'>
-        <p> carrito</p>
+        
         <div>
             <div>
                 <img className='cartImage' src={items.picture_url} alt='img not found'/>
                 <div>
                     <p>{items.title}</p>
-                    <p>${items.unit_price} X {items.quantity}- cantidad <span>total</span></p>
+                    <p>${items.unit_price} X {items.quantity}- ${suma} cantidad <span>total</span></p>
                 </div>
                 
                 <div onClick={handleClickD}>
