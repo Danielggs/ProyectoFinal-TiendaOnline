@@ -99,7 +99,7 @@ function rootReducer(state = initialState, action){
                 }
 
                 case 'ADD_CART':
-           let  Ncarts = JSON.parse(localStorage.getItem('cart'))
+           let  Ncarts = JSON.parse(localStorage.getItem(action.email))
                 
             if(Ncarts === null){
                Ncarts =[]
@@ -112,7 +112,7 @@ function rootReducer(state = initialState, action){
             }
             console.log(Ncarts)
             
-            localStorage.setItem('cart', JSON.stringify(Ncarts)) 
+            localStorage.setItem(action.email, JSON.stringify(Ncarts)) 
            
             return{
                 ...state,
@@ -120,12 +120,12 @@ function rootReducer(state = initialState, action){
             } 
 
             case "REMOVE_TO_CART":
-          let Ncart = JSON.parse(localStorage.getItem('cart'))
+          let Ncart = JSON.parse(localStorage.getItem(action.email))
           let  Ncartfilter =[Ncart.findIndex(e=>e.id === action.payload)]
           Ncart.splice(Ncartfilter, 1)
           let NewNcart = JSON.stringify(Ncart)
         
-          localStorage.setItem('cart',NewNcart ) 
+          localStorage.setItem(action.email,NewNcart ) 
 
             return{
                 ...state,

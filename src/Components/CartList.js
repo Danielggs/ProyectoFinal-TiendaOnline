@@ -2,7 +2,7 @@ import React from 'react'
 import CartModel from './CartModel'
 import { useDispatch, useSelector } from 'react-redux';
 import CheckOut  from './CheckOut'
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0} from "@auth0/auth0-react";
 import { CrearRef } from '../Redux/actions'
 
 
@@ -11,7 +11,8 @@ const CartList = () => {
   const dispatch = useDispatch()
   const {getAccessTokenSilently } = useAuth0();
   const cartLS = useSelector((state)=>state.cart)
-  let Ncart = JSON.parse(localStorage.getItem('cart'))
+  const{user}=useAuth0();
+  let Ncart = JSON.parse(localStorage.getItem(user?.email))
 
   if(Ncart === null){
     Ncart = 0

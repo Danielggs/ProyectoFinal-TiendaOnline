@@ -3,14 +3,15 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import './card.css'
 import { addCart } from '../Redux/actions';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 const Card = ({data}) => {
 
   const dispatch = useDispatch()
-  
+  const {user}=useAuth0()
   const onClick = (e)=>{
-    dispatch(addCart (data))
+    dispatch(addCart (data,user?.email))
   }
   const [stars,setStars]=useState(0);
   useEffect(()=>{
@@ -40,7 +41,6 @@ const Card = ({data}) => {
       <img src={stars<4?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'}/>
       <img src={stars<5?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'}/>
       <div className="size">
-        <h3>Stock :</h3>
         {
           Object.keys(data.stock).map((e)=>{
             return <h3>{e}:{data.stock[e]}</h3>;
