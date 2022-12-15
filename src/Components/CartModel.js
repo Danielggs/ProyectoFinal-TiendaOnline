@@ -25,7 +25,7 @@ const CartModel = ({items}) => {
                 <img className='cartImage' src={items.picture_url} alt='img not found'/>
                 <div>
                     <p>{items.title}</p>
-                    <p>${items.unit_price} - cantidad <span>total</span></p>
+                    <p>${items.unit_price} X {items.quantity}- cantidad <span>total</span></p>
                 </div>
                 
                 <div onClick={handleClickD}>

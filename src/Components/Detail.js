@@ -13,7 +13,7 @@ const Detail = (props) => {
   dispatch(findByID(id));
 },[dispatch]  )
 
-console.log("en el componenete ",data)
+
 
   return (
     <div>

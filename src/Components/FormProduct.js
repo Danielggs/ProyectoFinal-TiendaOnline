@@ -99,22 +99,7 @@ const FormProduct = () => {
         Error='Caracter no valido'
         expreReg={expreRP}
        />
-       <Input
-       estado={category}
-       cambiarEstado={setCategory}
-        titulo='categoria'
-        tipo= 'text'
-        Error='Caracter no valido'
-        expreReg={expreRP}
-       />
-       <Input
-       estado={description}
-       cambiarEstado={setDescription}
-        titulo='descripcion'
-        tipo= 'text'
-        Error='Caracter no valido'
-        expreReg={expreRP}
-       />
+   
 
   {   /* <Input
        estado={image}

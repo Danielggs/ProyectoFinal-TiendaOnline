@@ -3,6 +3,9 @@ import "./ProductDetail.css"
 import { addCart } from '../Redux/actions';
 import { useDispatch } from 'react-redux';
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
+
 
 
 const ProductDetail = ({data}) => {
@@ -20,9 +23,19 @@ const ProductDetail = ({data}) => {
         unit_price: data.price
 
     }
+    const onClickPlus=(e)=>{
+        if(quantity<data.stock.cantidad)
+        setQuantity(quantity+1)
+    }
+    const onClickMinus=(e)=>{
+        if(quantity> 0){
+            setQuantity(quantity-1)
+        }
+       
+    }
 
     const onClick = (e)=>{
-        console.log(productTocart)
+   
       dispatch(addCart (productTocart))
     }
   return (
@@ -48,6 +61,17 @@ const ProductDetail = ({data}) => {
    <span className="shopping-cart">  <AiOutlineShoppingCart className="fa fa-shopping-cart"/></span>
    <span className="buy">Get now</span>
  </button>
+<br/>
+<div className='inputStock' >
+<div  onClick={onClickMinus}>	
+ <AiOutlineMinus  className='Minus'/>	
+ </div>
+ <input className='inputST' type="text" value={quantity}/>
+ <div onClick={onClickPlus} >	
+<AiOutlinePlus className='Plus'/>
+</div >
+</div>
+ 
 	
 </div>
 			

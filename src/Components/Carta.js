@@ -16,11 +16,11 @@ const Card = ({data}) => {
       sum+=data.rate[e];
       cont++;
     })
-    console.log(sum/cont);
+  
     setStars(cont>0?sum/cont:1)
   },[data])
 
-  console.log(data)
+ 
 
   return (
     <div className="container3">
@@ -39,7 +39,7 @@ const Card = ({data}) => {
         <h3>Stock :</h3>
         {
           Object.keys(data.stock).map((e)=>{
-            return <h3>{e}:{data.stock[e]}</h3>;
+            return <h3>{data.stock[e]}</h3>;
           })
         }
 

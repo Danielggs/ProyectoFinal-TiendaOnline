@@ -62,3 +62,10 @@ export function findByID(id){
       payload: id})
   }
 }
+
+export function updateProduct(payload,token) {
+  return async function (dispatch) {
+      const data = await axios.put(`http://localhost:3002/product`, payload,{headers:{Authorization : `Bearer ${token}`}})
+      return dispatch({ type: "PRODUCT_UPDATE", payload: data})
+  }
+}

@@ -37,6 +37,9 @@ function rootReducer(state = initialState, action){
                    
                     ...state 
                 }
+        case "PRODUCT_UPDATE":
+               return{            
+                ...state }
 
                 case 'ADD_CART':
            let  Ncarts = JSON.parse(localStorage.getItem('cart'))

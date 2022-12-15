@@ -73,6 +73,22 @@ font-family: 'EB Garamond', serif;
 	color: #7d7d7d;
 	
 }
+.inputStock{
+	border: 1px solid rgba(58, 48, 48, 0.575);
+	display: flex;
+	margin-top: 5px;
+	justify-content: space-between;
+	
+}
+.Minus{
+	padding-top: 6px;
+}
+.Plus{
+	padding-top: 6px;
+}
+.inputST{
+	text-align: center;
+}
 .control{
 	position: absolute;
 	bottom: 20%;

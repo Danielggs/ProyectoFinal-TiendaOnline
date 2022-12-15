@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import CheckOut  from './CheckOut'
 import { useAuth0 } from "@auth0/auth0-react";
-import { CrearRef } from '../Redux/actions'
+import { CrearRef ,updateProduct} from '../Redux/actions'
 
 
 
@@ -19,7 +19,14 @@ const CartList = () => {
     Ncart = 0
   }
   
-  console.log(Ncart)
+ 
+    let change = Ncart.map((data)=>{
+ return  {
+        name: data.title,
+        quantity:data.quantity
+    }}) 
+    console.log(change)
+
 const onclickR=async()=>{
 
     
@@ -33,6 +40,10 @@ const onclickR=async()=>{
   dispatch(CrearRef ({
     Ncart
    },accessToken))}
+
+   const onclickCompra=async()=>{
+    dispatch(updateProduct())
+   }
 
 
   return (
