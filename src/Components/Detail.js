@@ -19,7 +19,7 @@ const Detail = (props) => {
     <div>
       {  
         data.length > 0 ?
-        <ProductDetail data={data[0]}/>
+        <ProductDetail data={data[0]} id={id} />
        :<div><h2>Cargando </h2></div>
 
     
