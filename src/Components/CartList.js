@@ -50,7 +50,7 @@ const onclickR=async()=>{
     <div className='CartlistContainer'>
          {
             Ncart.length  > 0 ? Ncart.map((el)=>{
-                console.log(cartLS.length)
+                
              return <CartModel items={el}/> 
 
             } ) : <h2>El carrito esta vacio</h2>

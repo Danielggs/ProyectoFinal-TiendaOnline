@@ -11,7 +11,7 @@ const CartModel = ({items}) => {
 
     const handleClickD = ()=>{
         dispatch(RemoveToCart (items.id))
-        console.log(items)
+     
 
       }
  

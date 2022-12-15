@@ -22,10 +22,28 @@ export function paginarProductos(page){
 export function crearProducto(payload,token){
   return async()=>{
       const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/product",payload,{headers:{Authorization : `Bearer ${token}`}})
-      console.log(response)
+     
       return response
     }
     
+}
+export function search(str){
+  return {
+    type:"SEARCH",
+    payload:str
+  }
+}
+export function deleteFilter(tipo){
+  return{
+    type:"DELETE_FILTRO",
+    payload:tipo
+  }
+}
+export function addFilter(tipo){
+  return{
+    type:"ADD_FILTRO",
+    payload:tipo
+  }
 }
 
 export function addCart(data){
@@ -45,9 +63,9 @@ export function RemoveToCart(id){
 }
 
 export function CrearRef(cart,token){
-	return async(dispatch)=>{
-	  const response = await axios.post("http://localhost:3002/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
-	 console.log("data: ", response.data)
+  return async(dispatch)=>{
+    const response = await axios.post("https://pf-backend-production-1e5b.up.railway.app/mc/generar",cart,{headers:{Authorization : `Bearer ${token}`}})
+
     return  dispatch({
       type:"PREF",
       payload: response.data})
@@ -67,5 +85,4 @@ export function updateProduct(payload,token) {
   return async function (dispatch) {
       const data = await axios.put(`http://localhost:3002/product`, payload,{headers:{Authorization : `Bearer ${token}`}})
       return dispatch({ type: "PRODUCT_UPDATE", payload: data})
-  }
-}
+  }}

@@ -1,20 +1,77 @@
 
+
 const initialState={
     product:[],
+    all_product:[],
     productPaginate:[],
     productDetail:[],
     linkPago:'',
-
-    cart:[]
+    cart:[],
+    search:"",
+    filter:[]
 }
 
 
 
 function rootReducer(state = initialState, action){
     switch (action.type) {
+        case "SEARCH":
+            return{
+              ...state,  
+              search:action.payload
+            }
+        case "FILTRAR":
+            return {
+                ...state,
+                product:state.all_product.filter((e)=>{
+                    var permitir=true;
+                    state.filter.forEach((f)=>{
+                        switch(f.type){
+                            case "category":
+                                if(permitir){
+                                    permitir=f.value===e.category;
+                                }
+                            break;
+                            case "price":
+                                if(permitir){
+                                    var value=f.value.substr(1)
+                                    if(f.value[0]=='>'){
+                                        permitir=e.price>value;
+                                    }
+                                    if(f.value[0]=='<'){
+                                        permitir=e.price<value;
+                                    }
+                                    if(f.value[0]=='='){
+                                        permitir=e.price==value;
+                                    }
+                                }
+                                break;
+                        }
+                    })
+                    return permitir;
+
+                }).filter((e)=>{
+                    return e.name.toLocaleLowerCase().includes(state.search.toLocaleLowerCase())
+                })
+            }
+        case "DELETE_FILTRO":
+            if(action.payload.type===undefined||action.payload.value===undefined)console.error("error, los fitros debe ser objetos {type:'category',value:'pantalones'} {type:'price',value:'{> o = o <}100'} " ,action.payload)
+            return{
+                ...state,
+                filter:state.filter.filter((e)=>{
+                    return !(e.value==action.payload.value&&e.type==action.payload.type)
+                })
+            }
+        case "ADD_FILTRO":
+            if(action.payload.type===undefined||action.payload.value===undefined)console.error("error, los fitros debe ser objetos {type:'category',value:'pantalones'} {type:'price',value:'{> o = o <}100'} " ,action.payload)
+            return{
+                ...state,
+                filter:[...state.filter,action.payload]
+            }
+        
 
         case "PAGINAR_PRODUCTOS":
-            console.log('data action',action.payload)
+       
         return{
                 ...state,
                 productPaginate:state.product.filter((e,i)=>{
@@ -24,10 +81,11 @@ function rootReducer(state = initialState, action){
 
 
         case "GET_PRODUCT" :
-           console.log('data action',action.payload)
+          
             return{
                 ...state,
-                product: action.payload, 
+                product: [...action.payload], 
+                all_product:[...action.payload]
     
             }
             
@@ -47,13 +105,14 @@ function rootReducer(state = initialState, action){
             if(Ncarts === null){
                Ncarts =[]
                Ncarts.push(action.payload)
+               
           
 
             }else{
                 Ncarts.push(action.payload)
              
             }
-            console.log(Ncarts)
+          
             
             localStorage.setItem('cart', JSON.stringify(Ncarts)) 
            
@@ -76,17 +135,17 @@ function rootReducer(state = initialState, action){
             } 
 
          case "PREF":
-                console.log( action.payload)
+              
                 return{
                     
                     ...state, 
                     linkPago: action.payload
                 }
           case "FIND_BY_ID":
-                    console.log( action.payload)
+                    
                     var allProduct= state.product
                     var findByID = allProduct.filter(el=> el.id.includes(action.payload))
-                    console.log(findByID)
+                    
                     return{
                          ...state,
                          productDetail:findByID
