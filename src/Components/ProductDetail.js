@@ -5,14 +5,17 @@ import { useDispatch } from 'react-redux';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { traerProductos } from '../Redux/actions';
 
 
-
-const ProductDetail = ({data}) => {
+const ProductDetail = ({data,id}) => {
 
     const dispatch = useDispatch()
     const[quantity, setQuantity] = useState(1)
-  
+    const [stars,setStars]=useState(5);
+    const {user,getAccessTokenSilently}=useAuth0()
    let productTocart= {
         id: data.id,
         title: data.name,
@@ -38,7 +41,7 @@ const ProductDetail = ({data}) => {
    
       dispatch(addCart (productTocart))
     }
-  return (
+  return (<>
     <div id="containerDetails">	
 	
 	<div className="product-details">
@@ -92,9 +95,24 @@ const ProductDetail = ({data}) => {
 		
 	</ul>
             </div>*/}
+    
+</div>
 </div>
 
-</div>
+  <div>
+    <img className='star-image' src={stars<1?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'} onClick={()=>{setStars(1)}} />
+    <img className='star-image' src={stars<2?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'} onClick={()=>{setStars(2)}} />
+    <img className='star-image' src={stars<3?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'} onClick={()=>{setStars(3)}} />
+    <img className='star-image' src={stars<4?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'} onClick={()=>{setStars(4)}} />
+    <img className='star-image' src={stars<5?'https://upload.wikimedia.org/wikipedia/commons/archive/b/b0/20120722205312%21Star-.svg':'https://upload.wikimedia.org/wikipedia/commons/archive/6/63/20070316213818%21Star%2A.svg'} onClick={()=>{setStars(5)}} />
+  </div>
+  <button className='rate-button' on onClick={async()=>{
+    var token=await getAccessTokenSilently()
+    await axios.post("https://pf-backend-production-1e5b.up.railway.app/product/rate",{id,stars,email:user?.email},{headers:{Authorization : `Bearer ${token}`}})
+    dispatch(traerProductos(token))
+  }}>rate</button>
+  </>
+
 
   )
 }
